@@ -16,6 +16,12 @@ class ProductReserverService{
         console.log(sorter)
         return await axios.get(`${PRODUCTS_API_URL}/${sorter}`);
     }
+
+    createProduct(product){
+        console.log("jeeee")
+        console.log(product)
+        return axios.post(`${PRODUCTS_API_URL}/CreateProduct`, product);
+    }
 }
 
 export default new ProductReserverService();
