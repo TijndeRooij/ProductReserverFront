@@ -7,9 +7,9 @@ class ProductReserverService{
         return await axios.get(`${PRODUCTS_API_URL}/id`);
     }
 
-    updateProduct(product){
+    async updateProduct(product){
         console.log(" " + product.id)
-        return axios.put(`${PRODUCTS_API_URL}/${product.id}`, product);
+        return await axios.put(`${PRODUCTS_API_URL}/${product.id}`, product);
     }
 
     async sortProductList(sorter){
@@ -17,10 +17,9 @@ class ProductReserverService{
         return await axios.get(`${PRODUCTS_API_URL}/${sorter}`);
     }
 
-    createProduct(product){
-        console.log("jeeee")
+    async createProduct(product){
         console.log(product)
-        return axios.post(`${PRODUCTS_API_URL}/CreateProduct`, product);
+        return await axios.post(`${PRODUCTS_API_URL}/CreateProduct`, product);
     }
 }
 

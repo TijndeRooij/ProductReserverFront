@@ -1,23 +1,29 @@
 <template>
     <div>
       <h1>Instructor Application</h1>
-      <table>
-        <th v-on:click="sortBy('id')">         Id         <i id="id" class="arrow down"></i></th>
-        <th>                                   Name       </th>
-        <th>                                   Discription</th>
-        <th v-on:click="sortBy('quantity')">   Quantity   <i id="quantity" class="arrow down"></i></th>
-        <th v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
-        <th>                                   Buy date   </th>
-        <th></th>
-        <tr v-for="product in products" v-bind:key="product.name">
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.discription }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.rating }}</td>
-            <td>{{ product.buyDate }}</td>
-            <td><button v-if="product.quantity > 0" v-on:click="useProduct(product)">Use</button></td>
-        </tr>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" v-on:click="sortBy('id')">         Id         <i id="id" class="arrow down"></i></th>
+            <th scope="col">                                   Name       </th>
+            <th scope="col">                                   Discription</th>
+            <th scope="col" v-on:click="sortBy('quantity')">   Quantity   <i id="quantity" class="arrow down"></i></th>
+            <th scope="col" v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
+            <th scope="col">                                   Buy date   </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row" v-for="product in products" v-bind:key="product.name">
+              <td>{{ product.id }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.discription }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.rating }}</td>
+              <td>{{ product.buyDate }}</td>
+              <td><button class="btn btn-info" v-if="product.quantity > 0" v-on:click="useProduct(product)">Use</button></td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </template>
@@ -59,6 +65,7 @@ import ProductReserverService from "../service/ProductReserverService"
               id.style.display = "none";
               if(id.id == idValue){
                 id.style.display = "inline-block";
+                this.refreshProducts()
                 ProductReserverService.sortProductList(id.id)
                 .then(response => {
                   this.products = response.data
@@ -74,25 +81,8 @@ import ProductReserverService from "../service/ProductReserverService"
 </script>
 
 <style scoped>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 1px;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .arrow {
-  border: solid green;
+  border: solid #20c997;
   border-width: 0 3px 3px 0;
   display: none;
   padding: 3px;
