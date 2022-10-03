@@ -1,6 +1,9 @@
 <template>
     <div>
-      <h1>Instructor Application</h1>
+      <h1>Products</h1>
+      <div style="max-width: 100rem;" v-if="errors.length">
+        <div class="alert alert-warning" v-bind:key="index" v-for="(error, index) in errors">{{error}}</div>
+      </div><br>
       <table class="table">
         <thead>
           <tr>
@@ -8,25 +11,37 @@
             <th scope="col">                                   Name       </th>
             <th scope="col">                                   Discription</th>
             <th scope="col" v-on:click="sortBy('quantity')">   Quantity   <i id="quantity" class="arrow down"></i></th>
+            <th scope="col">                                   Guidelines </th>
             <th scope="col" v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
             <th scope="col">                                   Buy date   </th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr scope="row" v-for="product in products" v-bind:key="product.name">
-              <td>{{ product.id }}</td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.discription }}</td>
-              <td>{{ product.quantity }}</td>
-              <td>{{ product.rating }}</td>
-              <td>{{ product.buyDate }}</td>
-              <td><button class="btn btn-info" v-if="product.quantity > 0" v-on:click="useProduct(product)">Use</button></td>
+          <tr scope="row" style="height: max-content" v-for="product in products" v-bind:key="product.name">
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.discription }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.guideLines }}</td>
+            <td>{{ product.rating }}</td>
+            <td>{{ product.buyDate }}</td>
+            <td>
+              <div v-if="product.quantity !== 0" class="btn-group buttons" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-success" v-on:click="useProduct(product)">Use</button>
+                <button type="button" class="btn btn-success" v-on:click="min()">&minus;</button>
+                <button type="button" class="btn btn-success" v-on:click="add(product.quantity)">&plus;</button>
+                <button type="button" class="btn btn-success">
+                  <span class="number">{{ totalUse }}</span>
+                  <span class="nonetext">0</span>
+                </button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </template>
+</template>
 
 <script>
 import ProductReserverService from "../service/ProductReserverService"
@@ -34,13 +49,14 @@ import ProductReserverService from "../service/ProductReserverService"
       name: "ProductsView",
       data() {
         return {
+            totalUse: 0,
             products: [],
-            INSTRUCTOR: "null",
+            errors: [],
         };
       },
       methods: {
         refreshProducts() {
-            ProductReserverService.retrieveAllProducts()
+            ProductReserverService.retrieveAllProducts().catch(err => this.errors.push(err.message))
             .then(response => {
                 this.products = response.data;
                 console.log(response.data);
@@ -48,11 +64,25 @@ import ProductReserverService from "../service/ProductReserverService"
         },
         useProduct(product) {
             console.log(product.id)
-            ProductReserverService.updateProduct(product)
+            ProductReserverService.updateProduct(product, this.totalUse).catch(err => this.errors.push(err))
             .then(response => {
               this.refreshProducts();
+              this.totalUse = 0;
               response.data;
             });
+        },
+        resetTotal(){
+          this.totalUse = 0;
+        },
+        min(){
+            if(this.totalUse === 0){ return }
+            this.totalUse = this.totalUse - 1;
+        },
+        add(quantity){
+            if(this.totalUse !== quantity)
+            {
+              this.totalUse = this.totalUse + 1;
+            }
         },
         sortBy(idValue){
             const ids = [
@@ -65,8 +95,7 @@ import ProductReserverService from "../service/ProductReserverService"
               id.style.display = "none";
               if(id.id == idValue){
                 id.style.display = "inline-block";
-                this.refreshProducts()
-                ProductReserverService.sortProductList(id.id)
+                ProductReserverService.sortProductList(id.id).catch(err => this.errors.push(err))
                 .then(response => {
                   this.products = response.data
                 });
@@ -92,4 +121,17 @@ import ProductReserverService from "../service/ProductReserverService"
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
+
+.buttons .number {
+  display: none;
+}
+
+.buttons:hover .number {
+  display: block;
+}
+
+.buttons:hover .nonetext {
+  display: none;
+}
+
 </style>
