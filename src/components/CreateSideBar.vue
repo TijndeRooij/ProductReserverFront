@@ -91,16 +91,9 @@
             document.getElementById("newProductbtn").style.display = "none";
         },
         close() {
+            this.done = false;
             document.getElementById("sidenav").style.width = ".1%";
             document.getElementById("newProductbtn").style.display = "block";
-            this.done = false;
-        },
-        refreshProducts() {
-            ProductReserverService.retrieveAllProducts().catch(err => this.errors.push(err.message))
-            .then(response => {
-                this.products = response.data;
-                console.log(response.data);
-            });
         },
         createProduct(e) {
             e.preventDefault();
@@ -119,7 +112,6 @@
                 this.product.rating = 4;
                 ProductReserverService.createProduct(this.product).catch(err => this.errors.push(err))
                     .then(() => {
-                        this.refreshProducts();
                         this.done = true;
                 });
             }

@@ -15,10 +15,10 @@
             <th scope="col" v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
             <th scope="col">                                   Buy date   </th>
             <th scope="col">
-              <form class="d-flex">
-                <input v-model="search" class="form-control me-sm-2" type="text" placeholder="Search">
-                <input v-on:click="searchName()" class="btn btn-secondary my-2 my-sm-0" value="Search"/>
-              </form>
+              <input @change="searchName()" v-model="search" max-width="fit-content" class="form-control me-sm-2" type="text" placeholder="Search"/>
+            </th>
+            <th scope="col">
+              <input type="image" v-on:click="searchName()" style="max-width:3rem; display: block;" class="btn btn-secondary my-2 my-sm-0" src="https://www.pngmart.com/files/8/Search-Button-PNG-HD-Photo.png"/>
             </th>
           </tr>
         </thead>
@@ -40,6 +40,10 @@
                   <span class="number">{{ totalUse }}</span>
                   <span class="nonetext">0</span>
                 </button>
+              </div>
+              <div style="margin-left: 10px;" class="btn-group" role="group">
+                <button v-on:click="deleteProduct(product.id)" type="button" class="btn btn-danger">Delete</button>
+                <button v-on:click="editProduct(product.id)" type="button" class="btn btn-warning">Edit</button>
               </div>
             </td>
           </tr>
@@ -113,6 +117,17 @@ import ProductReserverService from "../service/ProductReserverService"
             this.products = response.data
           });
         },
+        deleteProduct(id){
+          ProductReserverService.deleteProduct(id).catch(err => this.errors.push(err))
+          .then(response =>{
+            this.refreshProducts();
+            console.log(response.data);
+          })
+        },
+        editProduct(productId){
+          const id = this.products.find(({ id }) => id === productId).id
+          this.$router.push(`/product/${id}`)
+        }
       },
       created() {
         this.refreshProducts();
