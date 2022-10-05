@@ -3,7 +3,7 @@
       <h1>Products</h1>
       <div style="max-width: 100rem;" v-if="errors.length">
         <div class="alert alert-warning" v-bind:key="index" v-for="(error, index) in errors">{{error}}</div>
-      </div><br>
+      </div>
       <table class="table">
         <thead>
           <tr>
@@ -14,7 +14,12 @@
             <th scope="col">                                   Guidelines </th>
             <th scope="col" v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
             <th scope="col">                                   Buy date   </th>
-            <th scope="col"></th>
+            <th scope="col">
+              <form class="d-flex">
+                <input v-model="search" class="form-control me-sm-2" type="text" placeholder="Search">
+                <input v-on:click="searchName()" class="btn btn-secondary my-2 my-sm-0" value="Search"/>
+              </form>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +32,7 @@
             <td>{{ product.rating }}</td>
             <td>{{ product.buyDate }}</td>
             <td>
-              <div v-if="product.quantity !== 0" class="btn-group buttons" role="group" aria-label="Basic example">
+              <div v-if="product.quantity !== 0" class="btn-group buttons" role="group" v-on:mouseleave="resetTotal()" aria-label="Basic example">
                 <button type="button" class="btn btn-success" v-on:click="useProduct(product)">Use</button>
                 <button type="button" class="btn btn-success" v-on:click="min()">&minus;</button>
                 <button type="button" class="btn btn-success" v-on:click="add(product.quantity)">&plus;</button>
@@ -52,6 +57,7 @@ import ProductReserverService from "../service/ProductReserverService"
             totalUse: 0,
             products: [],
             errors: [],
+            search: "",
         };
       },
       methods: {
@@ -79,8 +85,7 @@ import ProductReserverService from "../service/ProductReserverService"
             this.totalUse = this.totalUse - 1;
         },
         add(quantity){
-            if(this.totalUse !== quantity)
-            {
+            if(this.totalUse !== quantity) { 
               this.totalUse = this.totalUse + 1;
             }
         },
@@ -101,7 +106,13 @@ import ProductReserverService from "../service/ProductReserverService"
                 });
               }
             });
-        }
+        },
+        searchName(){
+          ProductReserverService.searchProduct(this.search).catch(err => this.errors.push(err))
+          .then(response => {
+            this.products = response.data
+          });
+        },
       },
       created() {
         this.refreshProducts();
