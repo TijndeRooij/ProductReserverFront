@@ -1,12 +1,10 @@
 <template>
-<button v-on:click="open()" id="newProductbtn" class="btn btn-primary">New product</button>
-<div class="sidebar bg-light" id="sidenav">
-    <a class="closebtn" v-on:click="close()">&times;</a>
-    <form class="offcanvas-body" @submit="createProduct">
+<div class="sidebar bg-light" id="sidenav" v-on:mouseleave="close()" v-on:mouseover="open()">
+    <img v-if="done === true" src="../assets/Done-rafiki.svg" class="center"/>
+    <form class="offcanvas-body" v-if="done === false" @submit="createProduct">
         <div style="max-width: 20rem;" v-if="errors.length">
             <div class="alert alert-warning" v-bind:key="index" v-for="(error, index) in errors">{{error}}</div>
         </div>
-
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
             <div class="card-header">Name</div>
                 <div class="card-body">
@@ -57,9 +55,10 @@
                     </div>
                 </div>
             </div>
-        <Button style="margin-bottom: 15px; max-width: 20rem; height: 2rem" id="submitButton" class="btn btn-success" type="submit"><img style="width: 1rem; height: 1rem" src="https://img.icons8.com/puffy/344/experimental-create-new-puffy.png" alt="create" /> Create</Button><br>
+        <div class="d-grid gap-2">
+            <Button id="submitButton" class="btn btn-success" type="submit"><img style="width: 1rem; height: 1rem" src="https://img.icons8.com/puffy/344/experimental-create-new-puffy.png" alt="create" /> Create</Button><br>
+        </div>
     </form>
-    <br>
 </div>
 </template>
 
@@ -69,6 +68,7 @@
     name: "CreateSideBar",
     data() {
         return {
+            done: false,
             name: "",
             discription: "",
             quantity: 0,
@@ -91,8 +91,9 @@
             document.getElementById("newProductbtn").style.display = "none";
         },
         close() {
-            document.getElementById("sidenav").style.width = "0";
+            document.getElementById("sidenav").style.width = ".1%";
             document.getElementById("newProductbtn").style.display = "block";
+            this.done = false;
         },
         refreshProducts() {
             ProductReserverService.retrieveAllProducts().catch(err => this.errors.push(err.message))
@@ -108,7 +109,6 @@
                 this.errors.push("Enter valid values");
             }
             if (this.errors.length === 0) {
-
                 this.product.name = this.name;
                 this.product.discription = this.discription;
                 this.product.quantity = this.quantity;
@@ -120,6 +120,7 @@
                 ProductReserverService.createProduct(this.product).catch(err => this.errors.push(err))
                     .then(() => {
                         this.refreshProducts();
+                        this.done = true;
                 });
             }
         },
@@ -130,9 +131,9 @@
 <style scoped>
 .sidebar {
   height: 100%;
-  width: 0;
+  width: .1%;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   right: 0;
   overflow-x: hidden;
@@ -180,5 +181,16 @@
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
-  </style>
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 25rem;
+  width: 25rem;
+}
+</style>
   

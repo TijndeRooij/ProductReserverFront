@@ -21,6 +21,11 @@ class ProductReserverService{
         console.log(product)
         return await axios.post(`${PRODUCTS_API_URL}/CreateProduct`, product);
     }
+
+    async searchProduct(name){
+        console.log(name);
+        return await axios.get(`${PRODUCTS_API_URL}/name:/${name}`);
+    }
 }
 
 export default new ProductReserverService();
