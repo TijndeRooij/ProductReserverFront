@@ -42,8 +42,8 @@
                 </button>
               </div>
               <div style="margin-left: 10px;" class="btn-group" role="group">
-                <button v-on:click="deleteProduct(product.id)" type="button" class="btn btn-danger">Delete</button>
                 <button v-on:click="editProduct(product.id)" type="button" class="btn btn-warning">Edit</button>
+                <button v-on:click="deleteProduct(product.id)" type="button" class="btn btn-danger">Delete</button>
               </div>
             </td>
           </tr>
@@ -74,7 +74,7 @@ import ProductReserverService from "../service/ProductReserverService"
         },
         useProduct(product) {
             console.log(product.id)
-            ProductReserverService.updateProduct(product, this.totalUse).catch(err => this.errors.push(err))
+            ProductReserverService.updateProductsTotalUse(product, this.totalUse).catch(err => this.errors.push(err))
             .then(response => {
               this.refreshProducts();
               this.totalUse = 0;

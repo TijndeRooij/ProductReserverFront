@@ -1,4 +1,7 @@
 <template>
+<div id="createnav" class="createbutton">
+  <a class="bg-light" style="cursor: pointer" v-on:click="open()" id="createbutton"><strong>&lt; &lt;</strong></a>
+</div>
 <div class="sidebar bg-light" id="sidenav" v-on:mouseleave="close()" v-on:mouseover="open()">
     <img v-if="done === true" src="../assets/Done-rafiki.svg" class="center"/>
     <form class="offcanvas-body" v-if="done === false" @submit="createProduct">
@@ -94,6 +97,7 @@
             this.done = false;
             document.getElementById("sidenav").style.width = ".1%";
             document.getElementById("newProductbtn").style.display = "block";
+            this.$router.push("/");
         },
         createProduct(e) {
             e.preventDefault();
@@ -109,7 +113,7 @@
                     this.product.guideLines = this.product.guideLines + guideLine + "-";
                 });
                 this.product.guideLines = this.product.guideLines.substring(0, this.product.guideLines.length - 1);
-                this.product.rating = 4;
+                this.product.rating = 0;
                 ProductReserverService.createProduct(this.product).catch(err => this.errors.push(err))
                     .then(() => {
                         this.done = true;
@@ -121,6 +125,27 @@
 </script>
 
 <style scoped>
+.createbutton a {
+  position: fixed;
+  right: 0px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 60px;
+  border-radius: 20px 0px 0px 20px;
+  z-index: 1;
+}
+
+.createbutton a:hover {
+  border-radius: 50px 0px 0px 50px;
+}
+
+#createbutton {
+  top: 50%;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+
 .sidebar {
   height: 100%;
   width: .1%;
@@ -133,19 +158,6 @@
   padding-top: 60px;
 }
 
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  color: darkgray;
-  left: 25px;
-  font-size: 36px;
-  margin-right: 50px;
-}
-
-.sidebar a:hover {
-  color: #343a40;
-}
-
 .sidebar form {
   text-decoration: none;
   display: block;
@@ -154,24 +166,6 @@
   position: absolute;
   right: 25px;
   left: 25px;
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
 }
 
 .center {
@@ -183,6 +177,19 @@
   transform: translate(-50%, -50%);
   height: 25rem;
   width: 25rem;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+@keyframes move {
+    0% { top: 50%; }
+    33% { top: 49%; }
+    66% { top: 51%; }
+    100% { top: 50%; }
 }
 </style>
   

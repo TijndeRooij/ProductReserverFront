@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light fixed">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Products</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -7,6 +7,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>   
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign up</a>
+        </li>   
+        <li class="nav-item">
+          <a class="nav-link" href="/api/login">Log in</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -24,4 +30,7 @@
 
 <style>
 
+.fixed {
+  position:fixed;
+}
 </style>
