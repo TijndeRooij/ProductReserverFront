@@ -6,7 +6,6 @@ const headers = { headers: { "Authorization": "Bearer " + token}}
 
 class ProductReserverService{
     async retrieveAllProducts(){
-        console.log("hello");
         return await axios.get(`${PRODUCTS_API_URL}/id`, headers);
     }
 
