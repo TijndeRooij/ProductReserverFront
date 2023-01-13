@@ -1,7 +1,7 @@
 <template>
 <div style="overflow-x: hidden;">
   <NavBar></NavBar>
-  <CreateSideBar id="createSideBar"></CreateSideBar>
+  <CreateSideBar></CreateSideBar>
   <div class="main">
     <div class="container">
       <router-view></router-view>

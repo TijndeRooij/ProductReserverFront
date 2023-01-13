@@ -16,13 +16,7 @@ describe('template spec', () => {
     cy.get('#search').type('test')
     cy.get('#searchButton').click()
 
-//Edit
-    cy.get('#edit').click()
-    cy.wait(100)
-    cy.get('#form')
-    cy.get('#discriptionEdit').clear({force: true}).type('Test', {force: true})
-    cy.get('#quantityEdit').clear({force: true}).type('10', {force: true})
-    cy.get('#guideLine2Edit').click({force: true})
-    cy.get('#submitButtonEdit').click({force: true})
+//Delete product
+    cy.get('#delete').click()
   })
 })

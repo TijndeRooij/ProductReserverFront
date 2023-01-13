@@ -1,6 +1,6 @@
 <template>
   <h1>Edit</h1>
-    <form class="center" style="max-width: 60rem;" @submit="updateProduct">
+    <form id="form" class="center" style="max-width: 60rem;" @submit="updateProduct">
         <div style="max-width: 60rem;" v-if="errors.length">
             <div class="alert alert-warning" v-bind:key="index" v-for="(error, index) in errors">{{error}}</div>
         </div>
@@ -9,21 +9,21 @@
               <div class="card-header">Name</div>
                   <div class="card-body">
                       <p class="card-text">Fill in the name of your new product below.</p>
-                      <input id="name" class="form-control" placeholder="John" v-model="name" /><br>
+                      <input id="nameEdit" class="form-control" placeholder="John" v-model="name" /><br>
                   </div>
           </div>
           <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
               <div class="card-header">Discription</div>
                   <div class="card-body">
                       <p class="card-text">Fill in the discription of your new product below.</p>
-                      <input id="discription" class="form-control" placeholder="This is the new product" v-model="discription" /><br>
+                      <input id="discriptionEdit" class="form-control" placeholder="This is the new product" v-model="discription" /><br>
                   </div>
           </div>
           <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
               <div class="card-header">Quantity</div>
                   <div class="card-body">
                       <p class="card-text">Fill in the total amount of your new product below.</p>
-                      <input class="form-control" id="quantity" type="number" min="0" step="5" placeholder="0" v-model="quantity" /><br>
+                      <input class="form-control" id="quantityEdit" type="number" min="0" step="5" placeholder="0" v-model="quantity" /><br>
                   </div>
           </div>
         </div>
@@ -31,27 +31,27 @@
             <div class="card-header">Guidelines</div>
                 <div class="card-body btn">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine1" value="1">
+                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine1Edit" value="1">
                         <label for="guideLine1"> Guideline 1</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine2" value="2">
+                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine2Edit" value="2">
                         <label for="guideLine2"> Guideline 2</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine3" value="3">
+                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine3Edit" value="3">
                         <label for="guideLine3"> Guideline 3</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine4" value="4">
+                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine4Edit" value="4">
                         <label for="guideLine4"> Guideline 4</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine5" value="5">
+                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine5Edit" value="5">
                         <label for="guideLine5"> Guideline 5</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine6" value="6">
+                        <input class="form-check-input" v-model="guideLines" type="checkbox" id="guideLine6Edit" value="6">
                         <label for="guideLine6"> Guideline 6</label>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
     </form>
 </template>
   
-  <script>
+<script>
 import ProductReserverService from '@/service/ProductReserverService';
   export default {
     name: "EditProductView",

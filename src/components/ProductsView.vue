@@ -7,14 +7,14 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col" v-on:click="sortBy('id')">         Id         <i id="id" class="arrow down"></i></th>
-            <th scope="col">                                   Name       </th>
-            <th scope="col">                                   Discription</th>
-            <th scope="col" v-on:click="sortBy('quantity')">   Quantity   <i id="quantity" class="arrow down"></i></th>
-            <th scope="col">                                   Guidelines </th>
-            <th scope="col" v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
-            <th scope="col">                                   Buy date   </th>
-            <th scope="col">
+            <th id="idSort"       scope="col"  v-on:click="sortBy('id')">        Id          <i id="id" class="arrow down"></i></th>
+            <th                   scope="col">                                   Name        </th>
+            <th                   scope="col">                                   Discription </th>
+            <th id="quantitySort" scope="col"  v-on:click="sortBy('quantity')">  Quantity    <i id="quantity" class="arrow down"></i></th>
+            <th                   scope="col">                                   Guidelines  </th>
+            <th id="ratingSort"   scope="col"  v-on:click="sortBy('rating')">    Rating      <i id="rating" class="arrow down"></i></th>
+            <th                   scope="col">                                   Buy date    </th>
+            <th                   scope="col">
               <input @change="searchName()" id="search" v-model="search" max-width="fit-content" class="form-control me-sm-2" type="text" placeholder="Search"/>
             </th>
             <th scope="col">
@@ -33,9 +33,9 @@
             <td>{{ product.buyDate }}</td>
             <td>
               <div v-if="product.quantity !== 0" class="btn-group buttons" role="group" v-on:mouseleave="resetTotal()" aria-label="Basic example">
-                <button type="button" class="btn btn-success" v-on:click="useProduct(product)">Use</button>
-                <button type="button" class="btn btn-success" v-on:click="min()">&minus;</button>
-                <button type="button" class="btn btn-success" v-on:click="add(product.quantity)">&plus;</button>
+                <button id="use" type="button" class="btn btn-success" v-on:click="useProduct(product)">Use</button>
+                <button id="min" type="button" class="btn btn-success" v-on:click="min()">&minus;</button>
+                <button id="plus" type="button" class="btn btn-success" v-on:click="add(product.quantity)">&plus;</button>
                 <button type="button" class="btn btn-success">
                   <span class="number">{{ totalUse }}</span>
                   <span class="nonetext">0</span>
@@ -43,7 +43,7 @@
               </div>
               <div style="margin-left: 10px;" class="btn-group" role="group">
                 <button v-on:click="editProduct(product.id)" type="button" class="btn btn-warning" id="edit">Edit</button>
-                <button v-on:click="deleteProduct(product.id)" type="button" class="btn btn-danger">Delete</button>
+                <button v-on:click="deleteProduct(product.id)" type="button" class="btn btn-danger" id="delete">Delete</button>
               </div>
             </td>
           </tr>
