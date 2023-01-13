@@ -6,6 +6,11 @@ import LogInForm from "../src/components/LogInForm"
 
 const routes = [
   {
+    path: "/api/login",
+    name: "LogInUser",
+    component: LogInForm
+  },
+  {
     path: "/",
     name: "Home",
     component: Home,
@@ -20,11 +25,6 @@ const routes = [
     name: "SignUpUser",
     component: SignUpForm,
   },
-  {
-    path: "/api/login",
-    name: "LogInUser",
-    component: LogInForm
-  }
 ];
 
 const router = createRouter({

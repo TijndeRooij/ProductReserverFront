@@ -9,21 +9,21 @@
               <div class="card-header">Name</div>
                   <div class="card-body">
                       <p class="card-text">Fill in the name of your new product below.</p>
-                      <input id="fdsdfsname" class="form-control" placeholder="John" v-model="name" /><br>
+                      <input id="name" class="form-control" placeholder="John" v-model="name" /><br>
                   </div>
           </div>
           <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
               <div class="card-header">Discription</div>
                   <div class="card-body">
                       <p class="card-text">Fill in the discription of your new product below.</p>
-                      <input class="form-control" placeholder="This is the new product" v-model="discription" /><br>
+                      <input id="discription" class="form-control" placeholder="This is the new product" v-model="discription" /><br>
                   </div>
           </div>
           <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
               <div class="card-header">Quantity</div>
                   <div class="card-body">
                       <p class="card-text">Fill in the total amount of your new product below.</p>
-                      <input class="form-control" id="discription" type="number" min="0" step="5" placeholder="0" v-model="quantity" /><br>
+                      <input class="form-control" id="quantity" type="number" min="0" step="5" placeholder="0" v-model="quantity" /><br>
                   </div>
           </div>
         </div>
@@ -57,8 +57,8 @@
                 </div>
             </div>
         <div class="d-grid gap-2">
-            <button id="submitButton" class="btn btn-success" type="submit"><img style="width: 1rem; height: 1rem" src="https://img.icons8.com/puffy/344/experimental-create-new-puffy.png" alt="update" /> Update</button>
-            <button id="submitButton" class="btn btn-danger" v-on:click="deleteProduct()" type="submit"><img style="width: 1rem; height: 1rem;" src="http://cdn.onlinewebfonts.com/svg/img_216917.png" alt="delete"/>  Delete</button>
+            <button id="submitButtonEdit" class="btn btn-success" type="submit"><img style="width: 1rem; height: 1rem" src="https://img.icons8.com/puffy/344/experimental-create-new-puffy.png" alt="update" /> Update</button>
+            <button id="submitButtonDelete" class="btn btn-danger" v-on:click="deleteProduct()" type="submit"><img style="width: 1rem; height: 1rem;" src="http://cdn.onlinewebfonts.com/svg/img_216917.png" alt="delete"/>  Delete</button>
         </div>
     </form>
 </template>

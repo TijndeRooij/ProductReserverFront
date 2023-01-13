@@ -94,7 +94,7 @@
         };
       },
       methods: {
-        async createUser(e) {
+        createUser(e) {
             e.preventDefault();
             this.errors = [];
             if (!this.firstName || !this.lastName || !this.userName || !this.phoneNumber || !this.passWord || !this.repeatPassWord || !this.eMail || !(this.passWord === this.repeatPassWord)) {
@@ -107,7 +107,7 @@
                 this.user.phoneNumber = this.phoneNumber;
                 this.user.password = this.passWord;
                 this.user.email = this.eMail;
-                await UserService.createUser(this.user).catch(err => this.errors.push(err))
+                UserService.createUser(this.user).catch(err => this.errors.push(err))
                     .then(() => {
                         console.log("User " + this.user.firstName + " " + this.user.lastName + " is succesfully created!");
                 });

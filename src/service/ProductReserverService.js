@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const PRODUCTS_API_URL = "http://localhost:8080";
+const PRODUCTS_API_URL = "http://localhost:5000";
 const token = JSON.parse(sessionStorage.getItem("accessToken"));
 const headers = { headers: { "Authorization": "Bearer " + token}}
 

@@ -7,9 +7,9 @@
         <input id="username" type="text" v-model="username" /><br/>
         <label for="password">Password: </label><br/>
         <input id="password" type="password" v-model="password" /><br/>
-        <input type="submit" />
+        <input type="submit" id="submit" />
     </form>
-    <input type="button" value="press for token" v-on:click="getToken()" />
+    <input type="button" id="token" value="press for token" v-on:click="getToken()" />
 </template>
     
 <script>
@@ -33,7 +33,7 @@ import UserService from '@/service/UserService';
             this.user.username = this.username;
             await UserService.logIn(this.user)
             .then(response => {
-                console.log(response.data);
+                console.log(response.data.access_token);
                 sessionStorage.setItem('accessToken', JSON.stringify(response.data.access_token))
             })
         },

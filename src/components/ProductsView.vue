@@ -15,10 +15,10 @@
             <th scope="col" v-on:click="sortBy('rating')">     Rating     <i id="rating" class="arrow down"></i></th>
             <th scope="col">                                   Buy date   </th>
             <th scope="col">
-              <input @change="searchName()" v-model="search" max-width="fit-content" class="form-control me-sm-2" type="text" placeholder="Search"/>
+              <input @change="searchName()" id="search" v-model="search" max-width="fit-content" class="form-control me-sm-2" type="text" placeholder="Search"/>
             </th>
             <th scope="col">
-              <input type="image" v-on:click="searchName()" style="max-width:3rem; display: block;" class="btn btn-secondary my-2 my-sm-0" src="https://www.pngmart.com/files/8/Search-Button-PNG-HD-Photo.png"/>
+              <input type="image" id="searchButton" v-on:click="searchName()" style="max-width:3rem; display: block;" class="btn btn-secondary my-2 my-sm-0" src="https://www.pngmart.com/files/8/Search-Button-PNG-HD-Photo.png"/>
             </th>
           </tr>
         </thead>
@@ -42,7 +42,7 @@
                 </button>
               </div>
               <div style="margin-left: 10px;" class="btn-group" role="group">
-                <button v-on:click="editProduct(product.id)" type="button" class="btn btn-warning">Edit</button>
+                <button v-on:click="editProduct(product.id)" type="button" class="btn btn-warning" id="edit">Edit</button>
                 <button v-on:click="deleteProduct(product.id)" type="button" class="btn btn-danger">Delete</button>
               </div>
             </td>

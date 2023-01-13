@@ -12,21 +12,21 @@
             <div class="card-header">Name</div>
                 <div class="card-body">
                     <p class="card-text">Fill in the name of your new product below.</p>
-                    <input class="form-control" placeholder="John" v-model="name" /><br>
+                    <input class="form-control" placeholder="John" v-model="name" id="name" /><br>
                 </div>
         </div>
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
             <div class="card-header">Discription</div>
                 <div class="card-body">
                     <p class="card-text">Fill in the discription of your new product below.</p>
-                    <input class="form-control" placeholder="This is the new product" v-model="discription" /><br>
+                    <input class="form-control" placeholder="This is the new product" id="discription" v-model="discription" /><br>
                 </div>
         </div>
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
             <div class="card-header">Quantity</div>
                 <div class="card-body">
                     <p class="card-text">Fill in the total amount of your new product below.</p>
-                    <input class="form-control" id="discription" type="number" min="0" step="5" placeholder="0" v-model="quantity" /><br>
+                    <input class="form-control" id="quantity" type="number" min="0" step="5" placeholder="0" v-model="quantity" /><br>
                 </div>
         </div>
         <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
