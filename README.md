@@ -1,24 +1,2 @@
 # productreserverfrontend
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Dit is de frontend van mijn Individueel project. Hierin staan alle pages die ik heb gemaakt. Het framework wat ik heb gebuikt is Vue.js. Zie [Keuses]() voor meer informatie over deze keuze. Ook staan hier mijn End to End testen in. Zie [Code Quality]() voor meer informatie hierover.
